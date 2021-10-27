@@ -21,6 +21,14 @@ App = {
                 }
             }
         }
+        else{
+            Swal.fire({
+                title: 'Browser is not Ethereum Enabled',
+                text: 'Please Install Metamask extension for your browser',
+                icon: 'info',
+                confirmButtonText: 'Okay!'
+            })
+        }
     },
 
     initContract: async () => {
@@ -58,6 +66,7 @@ App = {
 
     add_student_info: async () => {
         const name = $('#StudentName').val()
+        const mothersName = $('#mothersName').val()
         const id = $('#StudentID').val()
         const dateOfBirth = Math.floor(new Date($('#DateOfBirth').val()).getTime()/1000)
         const prn = $('#PRN').val()
@@ -65,33 +74,34 @@ App = {
 
         console.log(App.account)
         
-        await App.Student.add_student_info(id, name, dateOfBirth, prn, branch, {from: App.account})
+        await App.Student.add_student_info(id, name, mothersName, dateOfBirth, prn, branch, {from: App.account})
     },
 
     get_student_info: async () => {
         const id = $('#StudentID2').val()
+        const enteredMothersName = $('#mothersName2').val()
         const data = await App.Student.get_student_info(id)
-        console.log(JSON.stringify(data))
+        //console.log(JSON.stringify(data))
         var d = new Date(data['dateOfBirth']*1000)
         var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
 
-        if(date == "1-1-1970"){
+        if(enteredMothersName != data['mothersName']){
             Swal.fire({
                 title: 'Student Not Found',
-                text: "Make sure you have entered the corrent UID",
+                text: "Make sure you have entered the corrent UID and Mother's Name",
                 icon: 'error',
                 confirmButtonText: 'Close'
             })
         }
-        else{Swal.fire({
-            title: 'Student Found',
-            text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date , '\nPRN Number: ', data['prnNumber'], '\nBranch: ', data['branch']),
-            icon: 'success',
-            confirmButtonText: 'Close'
-        })}
-        
+        else{
+            Swal.fire({
+                title: 'Student Found',
+                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date , '\nPRN Number: ', data['prnNumber'], '\nBranch: ', data['branch']),
+                icon: 'success',
+                confirmButtonText: 'Close'
+            })
+        }
     }
-
 }
 
 $(() => {
@@ -99,4 +109,3 @@ $(() => {
       App.init()
     });
 });
-

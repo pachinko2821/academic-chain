@@ -1,29 +1,19 @@
-body {
-    background-image: url(img/background.png);
-    background-repeat: repeat;
-    height: 100%;
-    color: white;
-    font-weight: bold;
-}
-
-.text-center{
-    width: 100%;
-    margin-top: 5%;
-    overflow: hidden;
-}
-
-.left {
+.studentinfo{
+    /* margin-bottom: 2%;
+    width: 50%;
+    margin-top: 4%;
+     height: 35px;
+    width: 20%;
+    border-radius: 5%;  */
+    margin-bottom: 0%;
     width: 60%;
-    float: left;
-    padding-left: 20%;
-    padding-right: 20%;
-    padding-top: 3%;
-    padding-bottom: 3%;
-}
+    margin-top: 4%;
+} 
 
-.right {
-    margin-left: 62%;
-    padding-right: 20%;
-    padding-top: 3%;
-    padding-bottom: 3%;
+.addbutton{
+    float: left;
+    margin-top: 2%;
+}
+.information{
+    margin-left: 40%;
 }
