@@ -11,14 +11,14 @@
     <!-- NavBar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Home</a>
+          <a class="navbar-brand" href="/src/home.html">Home</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Admin</a>
+                <a class="nav-link active" aria-current="page" href="/src/index.html">Admin</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">About US</a>
@@ -68,16 +68,32 @@
         </div>
         <div class="container-fluid">
             <form onSubmit="App.get_student_info(); return false;" class="my-form">
-                <div class="information1">
+              <div class="information">
                 <div class="form-group studentinfo">
-                    <label for="StudentID2">Student ID</label>
-                    <input id="StudentID2" type="text" class="form-control studentinfo" placeholder="118XY1234A" required>
+                    <label for="Sub1">Sub1</label>
+                    <input id="Sub1" type="number" onKeyUp="if(this.value>100){this.value='';}else if(this.value<0){this.value='0';}" class="form-control my-2" required>
                 </div>
                 <div class="form-group studentinfo">
-                    <label for="mothersName2">Mother's Name</label>
-                    <input id="mothersName2" type="text" class="form-control my-2 studentinfo" placeholder="John Doe" required>
+                    <label for="Sub2">Sub2</label>
+                    <input id="Sub2" type="number" onKeyUp="if(this.value>100){this.value='';}else if(this.value<0){this.value='0';}" class="form-control my-2" required>
                 </div>
-                <button type="submit" class="btn btn-primary addbutton">Fetch Student</button>
+                <div class="form-group studentinfo">
+                    <label for="Sub3">Sub3</label>
+                    <input id="Sub3" type="number" onKeyUp="if(this.value>100){this.value='';}else if(this.value<0){this.value='0';}" class="form-control my-2" required>
+                </div>
+                <div class="form-group studentinfo">
+                    <label for="Sub4">Sub4</label>
+                    <input id="Sub4" type="number" onKeyUp="if(this.value>100){this.value='';}else if(this.value<0){this.value='0';}" class="form-control my-2" required>
+                </div>
+                <div class="form-group studentinfo">
+                    <label for="Sub5">Sub5</label>
+                    <input id="Sub5" type="number" onKeyUp="if(this.value>100){this.value='';}else if(this.value<0){this.value='0';}" class="form-control my-2" required>
+                </div>
+                <div class="form-group studentinfo">
+                    <label for="Sub6">Sub6</label>
+                    <input id="Sub6" type="number" onKeyUp="if(this.value>100){this.value='';}else if(this.value<0){this.value='0';}" class="form-control my-2" required>
+                </div>
+                <button type="submit" class="btn btn-primary addbutton">Add Result</button>
             </form>
             <span id="StudentInfo">
             </span>
