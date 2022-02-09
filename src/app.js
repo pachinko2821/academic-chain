@@ -69,17 +69,15 @@ App = {
         const mothersName = $('#mothersName').val()
         const id = $('#StudentID').val()
         const dateOfBirth = Math.floor(new Date($('#DateOfBirth').val()).getTime()/1000)
-        const prn = $('#PRN').val()
-        const branch = $('#Branch').val()
 
         console.log(App.account)
         
-        await App.Student.add_student_info(id, name, mothersName, dateOfBirth, prn, branch, {from: App.account})
+        await App.Student.add_student_info(id, name, mothersName, dateOfBirth, {from: App.account})
     },
 
     get_student_info: async () => {
-        const id = $('#StudentID2').val()
-        const enteredMothersName = $('#mothersName2').val()
+        const id = $('#StudentIDFetch').val()
+        const enteredMothersName = $('#mothersNameFetch').val()
         const data = await App.Student.get_student_info(id)
         //console.log(JSON.stringify(data))
         var d = new Date(data['dateOfBirth']*1000)
@@ -96,12 +94,54 @@ App = {
         else{
             Swal.fire({
                 title: 'Student Found',
-                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date , '\nPRN Number: ', data['prnNumber'], '\nBranch: ', data['branch']),
+                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date),
                 icon: 'success',
                 confirmButtonText: 'Close'
             })
         }
-    }
+    },
+
+    add_student_result: async () => {
+        const mothersNameResult = $('#mothersNameResult').val()
+        const id = $('#id').val()
+        const sub1 = $('#Sub1').val()
+        const sub2 = $('#Sub2').val()
+        const sub3 = $('#Sub3').val()
+        const sub4 = $('#Sub4').val()
+        const sub5 = $('#Sub5').val()
+        const sub6 = $('#Sub6').val()
+
+        var result = {"Sub1":sub1, "Sub2":sub2, "Sub3":sub3, "Sub4":sub4, "Sub5":sub5, "Sub6":sub6}
+        result = JSON.stringify(result)
+
+        const data = await App.Student.get_student_info(id)
+        console.log(data)
+        console.log(result)
+
+        if(data['name'] == ''){
+            Swal.fire({
+                title: 'Student Not Found',
+                text: "Make sure you have entered the corrent UID and Mother's Name",
+                icon: 'error',
+                confirmButtonText: 'Close'
+            })
+        }
+        else{
+            const name = data['name']
+            const dateOfBirth = data['dateOfBirth']
+
+            console.log(App.account)
+            
+            await App.Student.add_student_result(id, name, mothersNameResult, dateOfBirth, result, {from: App.account})
+
+            Swal.fire({
+                title: 'Result Added Successfully',
+                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date),
+                icon: 'success',
+                confirmButtonText: 'Close'
+            })
+        }
+    },
 }
 
 $(() => {
