@@ -78,8 +78,8 @@ App = {
     get_student_info: async () => {
         const id = $('#StudentIDFetch').val()
         const enteredMothersName = $('#mothersNameFetch').val()
+
         const data = await App.Student.get_student_info(id)
-        //console.log(JSON.stringify(data))
         var d = new Date(data['dateOfBirth']*1000)
         var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
 
@@ -137,6 +137,34 @@ App = {
             Swal.fire({
                 title: 'Result Added Successfully',
                 text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date),
+                icon: 'success',
+                confirmButtonText: 'Close'
+            })
+        }
+    },
+
+    get_student_result: async () => {
+        const id = $('#StudentIDFetchResult').val()
+        const enteredMothersName = $('#mothersNameFetchResult').val()
+
+        const data = await App.Student.get_student_result(id)
+        
+        var result = JSON.parse(data['result'])
+        var d = new Date(data['dateOfBirth']*1000)
+        var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
+
+        if(enteredMothersName != data['mothersName']){
+            Swal.fire({
+                title: 'Student Not Found',
+                text: "Make sure you have entered the corrent UID and Mother's Name",
+                icon: 'error',
+                confirmButtonText: 'Close'
+            })
+        }
+        else{
+            Swal.fire({
+                title: 'Student Found',
+                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date, '\nResult: ', data['result']),
                 icon: 'success',
                 confirmButtonText: 'Close'
             })
