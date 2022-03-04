@@ -15,12 +15,12 @@
   "dependencies": {
     "@truffle/contract": "^4.3.25",
     "bootstrap": "^5.0.2",
-    "chai": "^4.3.4",
-    "chai-as-promised": "^7.1.1",
-    "chai-bignumber": "^3.0.0",
+    "jspdf": "^2.5.1",
     "lite-server": "^2.6.1",
-    "requirejs": "^2.3.6",
     "truffle": "^5.4.1",
     "web3": "latest"
+  },
+  "devDependencies": {
+    "openpgp": "^5.1.0"
   }
 }
