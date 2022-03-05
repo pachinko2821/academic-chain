@@ -136,7 +136,7 @@ App = {
 
             Swal.fire({
                 title: 'Result Added Successfully',
-                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date),
+                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ',data['dateOfBirth']),
                 icon: 'success',
                 confirmButtonText: 'Close'
             })
@@ -168,6 +168,7 @@ App = {
                 icon: 'success',
                 confirmButtonText: 'Download PDF'
             }).then(() => {
+                data['hallticket']= id
                 App.generate_pdf(data)   
             })
         }
@@ -230,7 +231,7 @@ FZOa
         encryptionKeys: publicKey,                                                                                                   
         });                                                                                                                              
         
-        console.log(encrypted);                                                                                                          
+        // console.log(encrypted);                                                                                                          
         data['pgp'] = btoa(encrypted);                                                                                                         
         window.open("templates/template.html?data="+btoa(JSON.stringify(data)));
 

@@ -66,6 +66,8 @@
         <h1>SSC Result</h1>
         <p id="name"></p>
         <p id="mothersname"></p>
+        <p id="hallticket"></p>
+        <p id="dateofbirth"></p>
 
         <table id="result">
             <tr>
@@ -82,11 +84,13 @@
 <script>
     data = JSON.parse(atob(window.location.search.substr(1).substring(5)));
     $('#name').text("Name: "+data['name']);
-    $('#mothersname').text("Mothers Name: "+data['mothersName']);
+    $('#mothersname').text("Mother's Name: "+data['mothersName']);
+    $('#hallticket').text("HallTicket Number: "+data['hallticket']);
+    $('#dateofbirth').text("Date of Birth: "+data['dateOfBirth']);
     $('#signature').text("Signature: "+data['pgp']);
     var result = JSON.parse(data['result']);
     $.each(result, function(subject, marks){
         $('#result tr:last').after('<tr><td>'+subject+'</td><td>'+marks+'</td></tr>');
     })
-    demoFromHTML();
+    // demoFromHTML();
 </script>
