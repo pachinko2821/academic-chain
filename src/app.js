@@ -80,8 +80,8 @@ App = {
         const enteredMothersName = $('#mothersNameFetch').val()
 
         const data = await App.Student.get_student_info(id)
-        var d = new Date(data['dateOfBirth']*1000)
-        var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
+        // var d = new Date(data['dateOfBirth']*1000)
+        // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
 
         if(enteredMothersName != data['mothersName']){
             Swal.fire({
@@ -94,7 +94,7 @@ App = {
         else{
             Swal.fire({
                 title: 'Student Found',
-                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date),
+                text: 'Hi, '.concat(data['name']),
                 icon: 'success',
                 confirmButtonText: 'Close'
             })
@@ -115,8 +115,8 @@ App = {
         result = JSON.stringify(result)
 
         const data = await App.Student.get_student_info(id)
-        console.log(data)
-        console.log(result)
+        // console.log(data)
+        // console.log(result)
 
         if(data['name'] == ''){
             Swal.fire({
@@ -136,7 +136,7 @@ App = {
 
             Swal.fire({
                 title: 'Result Added Successfully',
-                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ',data['dateOfBirth']),
+                text: 'It\'s safe on the chain!',
                 icon: 'success',
                 confirmButtonText: 'Close'
             })
@@ -150,8 +150,8 @@ App = {
         const data = await App.Student.get_student_result(id)
         
         var result = JSON.parse(data['result'])
-        var d = new Date(data['dateOfBirth']*1000)
-        var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
+        // var d = new Date(data['dateOfBirth']*1000)
+        // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
 
         if(enteredMothersName != data['mothersName']){
             Swal.fire({
@@ -164,7 +164,7 @@ App = {
         else{
             Swal.fire({
                 title: 'Student Found',
-                text: ''.concat('Name: ',data['name'], '\nDate of Birth: ', date, '\nResult: ', data['result']),
+                text: 'We Found the Account!',
                 icon: 'success',
                 confirmButtonText: 'Download PDF'
             }).then(() => {

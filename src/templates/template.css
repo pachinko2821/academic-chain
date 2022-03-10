@@ -1,0 +1,68 @@
+body {
+  font-family: "Work Sans", sans-serif;
+  /* font-weight: 200; */
+  padding: 2em;
+  border: 0.29em solid black;
+  /* background-color: #fed7ff; */
+  /* overflow: hidden; */
+}
+h1 {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: bold;
+}
+#signature {
+  word-wrap: break-word;
+  font-size: small;
+}
+
+.title {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  margin-bottom: 2em;
+  border: 2px solid black;
+  padding: 0.5em;
+}
+
+.title-text {
+  padding: 2em;
+  /* border: 1px solid black; */
+  margin-left: -1.5em;
+}
+
+.title-image {
+  text-align: center;
+  padding: auto;
+  margin: auto;
+}
+
+table {
+  border: 2px solid black;
+  text-align: center;
+}
+
+.main-area {
+  font-size: 1.3em;
+  border: 2px solid black;
+  padding: 1em;
+}
+
+#result {
+  /* width: 85%; */
+  margin: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.copy-img {
+  background: none;
+  width: 1.5%;
+  border: none;
+}
+
+@page {
+  size: auto;
+  margin: 0mm;
+}
