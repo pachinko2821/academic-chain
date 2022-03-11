@@ -259,7 +259,11 @@ ic1kYQiyU4NHWXeZpflmnIFirPGk2g==
         });
         // console.log(encrypted);                                                                                                          
         data['pgp'] = btoa(cleartextMessage);                                                                                                         
-        window.open("templates/template.html?data="+btoa(JSON.stringify(data)));
+        window.open(
+            "templates/template.html?data="+btoa(JSON.stringify(data)),
+            "_blank",
+            "toolbar=1, scrollbars=1, resizable=1, width=" + 800 + ", height=" + 600,
+        );
         }                                                                                                                                    
         catch(e){                                                                                                                            
         console.log("error: ", e); 

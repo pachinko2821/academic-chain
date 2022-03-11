@@ -83,6 +83,7 @@
   $("#result tbody").append(
     "<tr><th>Total</th><td><strong>" + total + "</strong></td></tr>"
   );
+  document.title = "result_"+data['hallticket'];
   window.print();
-  window.location = '/';
+  window.close();
 </script>
