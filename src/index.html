@@ -55,22 +55,26 @@
 </div>
 -->
 
+<div class="cover" id="cover">
+  <div class="covertext">LOADING...</div>
+</div>
+
 <!-- GET RESULT -->
-<div class="container-fluid d-flex">
+<div class="studentinfo shadow">
   <form onSubmit="App.get_student_result(); return false;" class="my-form1">
     <div class="information1">
-      <div class="form-group studentinfo">
+      <div class="form-group">
           <label for="StudentIDFetchResult">Student ID</label>
-          <input id="StudentIDFetchResult" type="text" class="form-control studentinfo" placeholder="118XY1234A" required>
+          <input id="StudentIDFetchResult" type="text" class="form-control" placeholder="118XY1234A" required>
       </div>
-      <div class="form-group studentinfo">
+      <div class="form-group">
           <label for="mothersNameFetchResult">Mother's Name</label>
-          <input id="mothersNameFetchResult" type="text" class="form-control my-2 studentinfo" placeholder="John Doe" required>
-          <button type="submit" class="btn btn-primary addbutton">Fetch Student Result</button>
+          <input id="mothersNameFetchResult" type="text" class="form-control my-2" placeholder="John Doe" required>
+          <div class="addbutton">
+            <button type="submit" class="btn btn-primary">Fetch Student Result</button>
+          </div>
     </div>
   </form>
-  <span id="StudentInfo">
-  </span>
 </div>
 
 

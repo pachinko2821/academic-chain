@@ -1,183 +1,188 @@
 App = {
-    loading: false,
-    contracts: {},
+  contracts: {},
 
-    init: async () => {
-        await App.initAccount()
-        await App.initContract()
-        await App.render()
-    },
+  init: async () => {
+    await App.initAccount();
+    await App.initContract();
+    await App.render();
+  },
 
-    //https://ethereum.stackexchange.com/questions/92095/web3-current-best-practice-to-connect-metamask-to-chrome/92097
-    initAccount: async () => {
-        if (window.ethereum) {
-            try {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                App.account = accounts[0]
-            }
-            catch (error) {
-                if (error.code === 4001) {
-                console.log(error)
-                }
-            }
+  //https://ethereum.stackexchange.com/questions/92095/web3-current-best-practice-to-connect-metamask-to-chrome/92097
+  initAccount: async () => {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        App.account = accounts[0];
+      } catch (error) {
+        if (error.code === 4001) {
+          console.log(error);
         }
-        else{
-            Swal.fire({
-                title: 'Browser is not Ethereum Enabled',
-                text: 'Please Install Metamask extension for your browser',
-                icon: 'info',
-                confirmButtonText: 'Okay!'
-            })
-        }
-    },
+      }
+    } else {
+      Swal.fire({
+        title: "Browser is not Ethereum Enabled",
+        text: "Please Install Metamask extension for your browser",
+        icon: "info",
+        confirmButtonText: "Okay!",
+      });
+    }
+  },
 
-    initContract: async () => {
-        const student = await $.getJSON('Student.json')
-        App.contracts.Student = TruffleContract(student)
-        App.contracts.Student.setProvider(window.ethereum)
-        App.Student = await App.contracts.Student.deployed()
-    },
+  initContract: async () => {
+    const student = await $.getJSON("Student.json");
+    App.contracts.Student = TruffleContract(student);
+    App.contracts.Student.setProvider(window.ethereum);
+    App.Student = await App.contracts.Student.deployed();
+  },
 
-    render: async () => {
-        if(App.loading){
-            return
-        }
-        
-        App.setLoading(true)
-        $('#account').html(App.account)
-        App.setLoading(false)
-    },
+  render: async () => {
+    var fadeTarget = document.getElementById("cover");
+    var fadeEffect = setInterval(function () {
+      if (!fadeTarget.style.opacity) {
+        fadeTarget.style.opacity = 1;
+      }
+      if (fadeTarget.style.opacity > 0) {
+        fadeTarget.style.opacity -= 0.1;
+      } else {
+        clearInterval(fadeEffect);
+      }
+    }, 50);
+    setTimeout(function () {
+      fadeTarget.remove();
+    }, "500");
+  },
 
-    setLoading: (boolean) => {
-        App.loading = boolean
-        
-        var $loader = $('#loader')
-        var $content = $('#content')
-        
-        if (App.loading) {
-            $content.hide()
-            $loader.show()
-        }
-        else {
-            $content.show()
-            $loader.hide()
-        }
-    },
+  add_student_info: async () => {
+    const name = $("#StudentName").val();
+    const mothersName = $("#mothersName").val();
+    const id = $("#StudentID").val();
+    const dateOfBirth = Math.floor(
+      new Date($("#DateOfBirth").val()).getTime() / 1000
+    );
 
-    add_student_info: async () => {
-        const name = $('#StudentName').val()
-        const mothersName = $('#mothersName').val()
-        const id = $('#StudentID').val()
-        const dateOfBirth = Math.floor(new Date($('#DateOfBirth').val()).getTime()/1000)
+    console.log(App.account);
 
-        console.log(App.account)
-        
-        await App.Student.add_student_info(id, name, mothersName, dateOfBirth, {from: App.account})
-    },
+    await App.Student.add_student_info(id, name, mothersName, dateOfBirth, {
+      from: App.account,
+    });
+  },
 
-    get_student_info: async () => {
-        const id = $('#StudentIDFetch').val()
-        const enteredMothersName = $('#mothersNameFetch').val()
+  get_student_info: async () => {
+    const id = $("#StudentIDFetch").val();
+    const enteredMothersName = $("#mothersNameFetch").val();
 
-        const data = await App.Student.get_student_info(id)
-        // var d = new Date(data['dateOfBirth']*1000)
-        // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
+    const data = await App.Student.get_student_info(id);
+    // var d = new Date(data['dateOfBirth']*1000)
+    // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
 
-        if(enteredMothersName != data['mothersName']){
-            Swal.fire({
-                title: 'Student Not Found',
-                text: "Make sure you have entered the corrent UID and Mother's Name",
-                icon: 'error',
-                confirmButtonText: 'Close'
-            })
-        }
-        else{
-            Swal.fire({
-                title: 'Student Found',
-                text: 'Hi, '.concat(data['name']),
-                icon: 'success',
-                confirmButtonText: 'Close'
-            })
-        }
-    },
+    if (enteredMothersName != data["mothersName"]) {
+      Swal.fire({
+        title: "Student Not Found",
+        text: "Make sure you have entered the corrent UID and Mother's Name",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+    } else {
+      Swal.fire({
+        title: "Student Found",
+        text: "Hi, ".concat(data["name"]),
+        icon: "success",
+        confirmButtonText: "Close",
+      });
+    }
+  },
 
-    add_student_result: async () => {
-        const mothersNameResult = $('#mothersNameResult').val()
-        const id = $('#id').val()
-        const sub1 = $('#Sub1').val()
-        const sub2 = $('#Sub2').val()
-        const sub3 = $('#Sub3').val()
-        const sub4 = $('#Sub4').val()
-        const sub5 = $('#Sub5').val()
-        const sub6 = $('#Sub6').val()
+  add_student_result: async () => {
+    const mothersNameResult = $("#mothersNameResult").val();
+    const id = $("#id").val();
+    const sub1 = $("#Sub1").val();
+    const sub2 = $("#Sub2").val();
+    const sub3 = $("#Sub3").val();
+    const sub4 = $("#Sub4").val();
+    const sub5 = $("#Sub5").val();
+    const sub6 = $("#Sub6").val();
 
-        var result = {"Sub1":sub1, "Sub2":sub2, "Sub3":sub3, "Sub4":sub4, "Sub5":sub5, "Sub6":sub6}
-        result = JSON.stringify(result)
+    var result = {
+      Sub1: sub1,
+      Sub2: sub2,
+      Sub3: sub3,
+      Sub4: sub4,
+      Sub5: sub5,
+      Sub6: sub6,
+    };
+    result = JSON.stringify(result);
 
-        const data = await App.Student.get_student_info(id)
-        // console.log(data)
-        // console.log(result)
+    const data = await App.Student.get_student_info(id);
+    // console.log(data)
+    // console.log(result)
 
-        if(data['name'] == ''){
-            Swal.fire({
-                title: 'Student Not Found',
-                text: "Make sure you have entered the corrent UID and Mother's Name",
-                icon: 'error',
-                confirmButtonText: 'Close'
-            })
-        }
-        else{
-            const name = data['name']
-            const dateOfBirth = data['dateOfBirth']
+    if (data["name"] == "") {
+      Swal.fire({
+        title: "Student Not Found",
+        text: "Make sure you have entered the corrent UID and Mother's Name",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+    } else {
+      const name = data["name"];
+      const dateOfBirth = data["dateOfBirth"];
 
-            console.log(App.account)
-            
-            await App.Student.add_student_result(id, name, mothersNameResult, dateOfBirth, result, {from: App.account})
+      console.log(App.account);
 
-            Swal.fire({
-                title: 'Result Added Successfully',
-                text: 'It\'s safe on the chain!',
-                icon: 'success',
-                confirmButtonText: 'Close'
-            })
-        }
-    },
+      await App.Student.add_student_result(
+        id,
+        name,
+        mothersNameResult,
+        dateOfBirth,
+        result,
+        { from: App.account }
+      );
 
-    get_student_result: async () => {
-        const id = $('#StudentIDFetchResult').val()
-        const enteredMothersName = $('#mothersNameFetchResult').val()
+      Swal.fire({
+        title: "Result Added Successfully",
+        text: "It's safe on the chain!",
+        icon: "success",
+        confirmButtonText: "Close",
+      });
+    }
+  },
 
-        const data = await App.Student.get_student_result(id)
-        
-        var result = JSON.parse(data['result'])
-        // var d = new Date(data['dateOfBirth']*1000)
-        // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
+  get_student_result: async () => {
+    const id = $("#StudentIDFetchResult").val();
+    const enteredMothersName = $("#mothersNameFetchResult").val();
 
-        if(enteredMothersName != data['mothersName']){
-            Swal.fire({
-                title: 'Student Not Found',
-                text: "Make sure you have entered the corrent UID and Mother's Name",
-                icon: 'error',
-                confirmButtonText: 'Close'
-            })
-        }
-        else{
-            Swal.fire({
-                title: 'Student Found',
-                text: 'We Found the Account!',
-                icon: 'success',
-                confirmButtonText: 'Download PDF'
-            }).then(() => {
-                data['hallticket']= id
-                App.generate_pdf(data)   
-            })
-        }
-    },
-    generate_pdf: async (data) => {
-        // https://github.com/openpgpjs/openpgpjs#encrypt-and-decrypt-string-data-with-pgp-keys                                                  
-        (async function() {                                                                                                                      
-        try{                                                                                                                                 
-        // put keys in backtick (``) to avoid errors caused by spaces or tabs                                                            
+    const data = await App.Student.get_student_result(id);
+
+    var result = JSON.parse(data["result"]);
+    // var d = new Date(data['dateOfBirth']*1000)
+    // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
+
+    if (enteredMothersName != data["mothersName"]) {
+      Swal.fire({
+        title: "Student Not Found",
+        text: "Make sure you have entered the corrent UID and Mother's Name",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+    } else {
+      Swal.fire({
+        title: "Student Found",
+        text: "We Found the Account!",
+        icon: "success",
+        confirmButtonText: "Download PDF",
+      }).then(() => {
+        data["hallticket"] = id;
+        App.generate_pdf(data);
+      });
+    }
+  },
+  generate_pdf: async (data) => {
+    // https://github.com/openpgpjs/openpgpjs#encrypt-and-decrypt-string-data-with-pgp-keys
+    (async function () {
+      try {
+        // put keys in backtick (``) to avoid errors caused by spaces or tabs
         const privateKeyArmored = `-----BEGIN PGP PRIVATE KEY BLOCK-----
 Version: Keybase OpenPGP v2.1.15
 Comment: https://keybase.io/crypto
@@ -248,34 +253,39 @@ LLyi/9xHkzqahQhBxs4Y3NPn6HD5Hlwa9tKFETMdx0PvsVrx+dkLIdByuWNLXtUb
 LRxrKEmXB8W/7i+bnnAyR2NM5GPcDj38rZKd3rSvl0YmYCE2F24z0x/RPofHZjH4
 ic1kYQiyU4NHWXeZpflmnIFirPGk2g==
 =s6is
------END PGP PRIVATE KEY BLOCK-----`;                                                                     
-                                                                                                                                
-        const message = JSON.stringify(data);                                                                                            
-        const privateKey = await openpgp.readKey({ armoredKey: privateKeyArmored });                                                       
-        const unsignedMessage = await openpgp.createCleartextMessage({text: message});                                                                                                                          
-        const cleartextMessage = await openpgp.sign({
-            message: unsignedMessage, // CleartextMessage or Message object
-            signingKeys: privateKey
+-----END PGP PRIVATE KEY BLOCK-----`;
+
+        const message = JSON.stringify(data);
+        const privateKey = await openpgp.readKey({
+          armoredKey: privateKeyArmored,
         });
-        // console.log(encrypted);                                                                                                          
-        data['pgp'] = btoa(cleartextMessage);                                                                                                         
+        const unsignedMessage = await openpgp.createCleartextMessage({
+          text: message,
+        });
+        const cleartextMessage = await openpgp.sign({
+          message: unsignedMessage, // CleartextMessage or Message object
+          signingKeys: privateKey,
+        });
+        // console.log(encrypted);
+        data["pgp"] = btoa(cleartextMessage);
         window.open(
-            "templates/template.html?data="+btoa(JSON.stringify(data)),
-            "_blank",
-            "toolbar=1, scrollbars=1, resizable=1, width=" + 800 + ", height=" + 600,
+          "templates/template.html?data=" + btoa(JSON.stringify(data)),
+          "_blank",
+          "toolbar=1, scrollbars=1, resizable=1, width=" +
+            800 +
+            ", height=" +
+            600
         );
-        }                                                                                                                                    
-        catch(e){                                                                                                                            
-        console.log("error: ", e); 
-        }
-        })();
-    },
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    })();
+  },
 
-    verify_signature: async () => {
-
-        (async () => {
-            try {
-            const publicKeyArmored = `-----BEGIN PGP PUBLIC KEY BLOCK-----
+  verify_signature: async () => {
+    (async () => {
+      try {
+        const publicKeyArmored = `-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: Keybase OpenPGP v2.1.15
 Comment: https://keybase.io/crypto
 
@@ -319,37 +329,41 @@ Y9wOPfytkp3etK+XRiZgITYXbjPTH9E+h8dmMfiJzWRhCLJTg0dZd5ml+WacgWKs
 8aTa
 =J1HM
 -----END PGP PUBLIC KEY BLOCK-----`; // public key
-                    const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
-                    const cleartextMessage = atob($('#signature').val());
-                    const signedMessage = await openpgp.readCleartextMessage({
-                        cleartextMessage // parse armored message
-                    });
-                    const verificationResult = await openpgp.verify({
-                        message: signedMessage,
-                        verificationKeys: publicKey
-                    });
-                    const { verified, keyID } = verificationResult.signatures[0];
-                        await verified; // throws on invalid signature
-                        Swal.fire({
-                            title: 'Valid Signature',
-                            text: "The data provided to you is legitimate",
-                            icon: 'success',
-                            confirmButtonText: 'Great!'
-                        })
-                    } catch (e) {
-                        Swal.fire({
-                            title: 'Invalid Signature',
-                            text: "The data provided to you is illegitimate",
-                            icon: 'error',
-                            confirmButtonText: 'Okay'
-                        })
-                    }
-        })();
-    }
-}
+        const publicKey = await openpgp.readKey({
+          armoredKey: publicKeyArmored,
+        });
+        const cleartextMessage = atob($("#signature").val());
+        const signedMessage = await openpgp.readCleartextMessage({
+          cleartextMessage, // parse armored message
+        });
+        const verificationResult = await openpgp.verify({
+          message: signedMessage,
+          verificationKeys: publicKey,
+        });
+        const { verified, keyID } = verificationResult.signatures[0];
+        await verified; // throws on invalid signature
+        Swal.fire({
+          title: "Valid Signature",
+          text: "The data provided to you is legitimate",
+          icon: "success",
+          confirmButtonText: "Great!",
+        });
+      } catch (e) {
+        Swal.fire({
+          title: "Invalid Signature",
+          text: "The data provided to you is illegitimate",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+      }
+    })();
+  },
+};
 
 $(() => {
-    $(window).load(() => {
-      App.init()
-    });
+  $(window).load(() => {
+    setTimeout(function () {
+      App.init();
+    }, "2000");
+  });
 });
