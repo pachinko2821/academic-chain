@@ -38,20 +38,7 @@ App = {
   },
 
   render: async () => {
-    var fadeTarget = document.getElementById("cover");
-    var fadeEffect = setInterval(function () {
-      if (!fadeTarget.style.opacity) {
-        fadeTarget.style.opacity = 1;
-      }
-      if (fadeTarget.style.opacity > 0) {
-        fadeTarget.style.opacity -= 0.1;
-      } else {
-        clearInterval(fadeEffect);
-      }
-    }, 50);
-    setTimeout(function () {
-      fadeTarget.remove();
-    }, "500");
+    console.log("Ready");
   },
 
   add_student_info: async () => {
@@ -67,30 +54,45 @@ App = {
     await App.Student.add_student_info(id, name, mothersName, dateOfBirth, {
       from: App.account,
     });
+    Swal.fire({
+      title: "Student Registered",
+      text: "Their Account is now on the chain",
+      icon: "success",
+      confirmButtonText: "Close",
+    });
   },
 
   get_student_info: async () => {
     const id = $("#StudentIDFetch").val();
     const enteredMothersName = $("#mothersNameFetch").val();
 
-    const data = await App.Student.get_student_info(id);
-    // var d = new Date(data['dateOfBirth']*1000)
-    // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
+    try {
+      const data = await App.Student.get_student_info(id);
 
-    if (enteredMothersName != data["mothersName"]) {
-      Swal.fire({
-        title: "Student Not Found",
-        text: "Make sure you have entered the corrent UID and Mother's Name",
-        icon: "error",
-        confirmButtonText: "Close",
-      });
-    } else {
-      Swal.fire({
-        title: "Student Found",
-        text: "Hi, ".concat(data["name"]),
-        icon: "success",
-        confirmButtonText: "Close",
-      });
+      if (enteredMothersName != data["mothersName"]) {
+        Swal.fire({
+          title: "Student Not Found",
+          text: "Make sure you have entered the corrent UID and Mother's Name",
+          icon: "error",
+          confirmButtonText: "Close",
+        });
+      } else {
+        Swal.fire({
+          title: "Student Found",
+          text: "Hi, ".concat(data["name"]),
+          icon: "success",
+          confirmButtonText: "Close",
+        });
+      }
+    } catch (error) {
+      if (enteredMothersName != data["mothersName"]) {
+        Swal.fire({
+          title: "Student Not Found",
+          text: "Make sure you have entered the corrent UID and Mother's Name",
+          icon: "error",
+          confirmButtonText: "Close",
+        });
+      }
     }
   },
 
@@ -153,28 +155,36 @@ App = {
     const id = $("#StudentIDFetchResult").val();
     const enteredMothersName = $("#mothersNameFetchResult").val();
 
-    const data = await App.Student.get_student_result(id);
+    try {
+      const data = await App.Student.get_student_result(id);
+      var result = JSON.parse(data["result"]);
+      // var d = new Date(data['dateOfBirth']*1000)
+      // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
 
-    var result = JSON.parse(data["result"]);
-    // var d = new Date(data['dateOfBirth']*1000)
-    // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
-
-    if (enteredMothersName != data["mothersName"]) {
+      if (enteredMothersName != data["mothersName"]) {
+        Swal.fire({
+          title: "Student Not Found",
+          text: "Make sure you have entered the corrent UID and Mother's Name",
+          icon: "error",
+          confirmButtonText: "Close",
+        });
+      } else {
+        Swal.fire({
+          title: "Student Found",
+          text: "We Found the Account!",
+          icon: "success",
+          confirmButtonText: "Download PDF",
+        }).then(() => {
+          data["hallticket"] = id;
+          App.generate_pdf(data);
+        });
+      }
+    } catch (error) {
       Swal.fire({
         title: "Student Not Found",
         text: "Make sure you have entered the corrent UID and Mother's Name",
         icon: "error",
         confirmButtonText: "Close",
-      });
-    } else {
-      Swal.fire({
-        title: "Student Found",
-        text: "We Found the Account!",
-        icon: "success",
-        confirmButtonText: "Download PDF",
-      }).then(() => {
-        data["hallticket"] = id;
-        App.generate_pdf(data);
       });
     }
   },
