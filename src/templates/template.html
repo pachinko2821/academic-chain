@@ -89,8 +89,9 @@
   document.title = "result_" + data["hallticket"];
 
   window.print();
-  window.onafterprint = (event) => {
-    event.preventDefault();
-    window.close();
-  };
+  window.addEventListener('afterprint', (event) => {
+    setTimeout(() => {
+      window.close();
+    }, 69);
+  });
 </script>
