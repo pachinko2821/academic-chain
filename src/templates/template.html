@@ -20,9 +20,9 @@
         <img src="/img/MSBSHSE-Logo.png" alt="SSC Result Logo" />
       </div>
       <div class="title-text">
-        <h1>
+        <h2>
           Maharashtra State Board of Secondary & Higher Secondary Education
-        </h1>
+        </h2>
       </div>
     </div>
     <div class="main-area">
@@ -83,7 +83,14 @@
   $("#result tbody").append(
     "<tr><th>Total</th><td><strong>" + total + "</strong></td></tr>"
   );
-  document.title = "result_"+data['hallticket'];
+  $("#result tbody").append(
+    "<tr><th>Percentage</th><td><strong>" + total / 6 + "</strong></td></tr>"
+  );
+  document.title = "result_" + data["hallticket"];
+
   window.print();
-  window.close();
+  window.onafterprint = (event) => {
+    event.preventDefault();
+    window.close();
+  };
 </script>

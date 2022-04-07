@@ -2,11 +2,10 @@ body {
   font-family: "Work Sans", sans-serif;
   /* font-weight: 200; */
   padding: 2em;
-  border: 0.29em solid black;
   /* background-color: #fed7ff; */
   /* overflow: hidden; */
 }
-h1 {
+h2 {
   text-align: center;
   font-family: "Playfair Display", serif;
   font-style: italic;

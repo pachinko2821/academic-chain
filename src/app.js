@@ -42,14 +42,23 @@ App = {
   },
 
   add_student_info: async () => {
+    if (App.account != "0x6d2f347eeef0fa8e33e0d4baf05f29641cc98b21") {
+      Swal.fire({
+        title: "You are not admin",
+        text: "Nice Try",
+        icon: "error",
+        confirmButtonText: "Go Back",
+      }).then(() => {
+        window.location = "/";
+      });
+      return;
+    }
     const name = $("#StudentName").val();
     const mothersName = $("#mothersName").val();
     const id = $("#StudentID").val();
     const dateOfBirth = Math.floor(
       new Date($("#DateOfBirth").val()).getTime() / 1000
     );
-
-    console.log(App.account);
 
     await App.Student.add_student_info(id, name, mothersName, dateOfBirth, {
       from: App.account,
@@ -97,6 +106,17 @@ App = {
   },
 
   add_student_result: async () => {
+    if (App.account != "0x6d2f347eeef0fa8e33e0d4baf05f29641cc98b21") {
+      Swal.fire({
+        title: "You are not admin",
+        text: "Nice Try",
+        icon: "error",
+        confirmButtonText: "Go Back",
+      }).then(() => {
+        window.location = "/";
+      });
+      return;
+    }
     const mothersNameResult = $("#mothersNameResult").val();
     const id = $("#id").val();
     const sub1 = $("#Sub1").val();
@@ -131,8 +151,6 @@ App = {
       const name = data["name"];
       const dateOfBirth = data["dateOfBirth"];
 
-      console.log(App.account);
-
       await App.Student.add_student_result(
         id,
         name,
@@ -164,7 +182,7 @@ App = {
       if (enteredMothersName != data["mothersName"]) {
         Swal.fire({
           title: "Student Not Found",
-          text: "Make sure you have entered the corrent UID and Mother's Name",
+          text: "Make sure you have entered the corrent HallTicket and Mother's Name",
           icon: "error",
           confirmButtonText: "Close",
         });
@@ -182,7 +200,7 @@ App = {
     } catch (error) {
       Swal.fire({
         title: "Student Not Found",
-        text: "Make sure you have entered the corrent UID and Mother's Name",
+        text: "Make sure you have entered the corrent HallTicket and Mother's Name",
         icon: "error",
         confirmButtonText: "Close",
       });
@@ -372,8 +390,6 @@ Y9wOPfytkp3etK+XRiZgITYXbjPTH9E+h8dmMfiJzWRhCLJTg0dZd5ml+WacgWKs
 
 $(() => {
   $(window).load(() => {
-    setTimeout(function () {
-      App.init();
-    }, "2000");
+    App.init();
   });
 });
