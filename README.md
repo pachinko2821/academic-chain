@@ -1,4 +1,4 @@
-# ACADEMIC-CHAIN
+# ACADEMIC-CHAIN (Bachelor of Engineering IT, Final Year Project)
 
 Academic-Chain is a Ethereum Decentralized Application, built for storage and retrival of academic results. The results generated in pdf format, and are signed with PGP. This Signature can be later verified to check for legitimacy.
 
