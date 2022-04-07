@@ -30,4 +30,4 @@ To run the project:
   - Run `npm install`
   - Run `npm run dev`
 
-NOTE: There are some issues with metamask on Brave and Chrome. No idea if the issue is on my end or global. The project works fine on Firefox, not tested on edge.
+NOTE: ~~There are some issues with metamask on Brave and Chrome. No idea if the issue is on my end or global. The project works fine on Firefox, not tested on edge.~~ I was using an older version of Truffle Contract. Everything works now. Not tested on MS Edge.
