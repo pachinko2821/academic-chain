@@ -1,10 +1,9 @@
 module.exports = {
   port: process.env.PORT,
   files: "*",
-  server: {
-    baseDir: ["./src", "./build/contracts"],
-    routes: {
-      "/vendor": "./node_modules",
-    },
+  notify: false,
+  server: ["./src", "./build/contracts"],
+  routes: {
+    "/vendor": "./node_modules",
   },
 };
