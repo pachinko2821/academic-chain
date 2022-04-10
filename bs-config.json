@@ -1,5 +1,5 @@
 {
-    "notify": false,
+    "port": "process.env.PORT",
     "server": {
         "baseDir": [
         "./src",
