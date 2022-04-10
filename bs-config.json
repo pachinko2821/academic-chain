@@ -1,4 +1,5 @@
 {
+    "notify": false,
     "server": {
         "baseDir": [
         "./src",
