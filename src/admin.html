@@ -59,7 +59,10 @@
         <div class="col-lg-6 col-md-12">
           <div class="studentform">
             <h2>REGISTER STUDENT</h2>
-            <form onSubmit="App.add_student_info();" class="my-form">
+            <form
+              onSubmit="App.add_student_info(); return false;"
+              class="my-form"
+            >
               <div class="information">
                 <div class="form-group">
                   <label for="StudentName">Name</label>
@@ -129,7 +132,7 @@
             </form>
             <div class="search-button">
               <button
-                onclick="App.search_student()"
+                onclick="App.search_student(); return false;"
                 class="btn btn-primary mb-3"
               >
                 Search
@@ -155,7 +158,10 @@
         <div class="col-lg-6">
           <div class="studentform">
             <h2>ADD STUDENT RESULT</h2>
-            <form onSubmit="App.add_student_result();" class="my-form">
+            <form
+              onSubmit="App.add_student_result(); return false;"
+              class="my-form"
+            >
               <div class="information">
                 <div class="form-group">
                   <label for="id">HallTicket</label>
