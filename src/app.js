@@ -38,7 +38,9 @@ App = {
   },
 
   render: async () => {
-    console.log("Ready");
+    if (window.location.pathname == "/admin.html") {
+      App.get_student_list();
+    }
   },
 
   add_student_info: async () => {
@@ -71,37 +73,68 @@ App = {
     });
   },
 
-  get_student_info: async () => {
-    const id = $("#StudentIDFetch").val();
-    const enteredMothersName = $("#mothersNameFetch").val();
+  get_student_list: async () => {
+    if (App.account != "0x6d2f347eeef0fa8e33e0d4baf05f29641cc98b21") {
+      Swal.fire({
+        title: "You are not admin",
+        text: "Nice Try",
+        icon: "error",
+        confirmButtonText: "Go Back",
+      }).then(() => {
+        window.location = "/";
+      });
+      return;
+    }
+    var unique = {};
+    let sudents_list = await App.Student.getPastEvents("StudentCreated", {
+      fromBlock: 0,
+    }).then(function (events) {
+      events.forEach((event) => {
+        if (!(event["args"]["id"] in unique)) {
+          $("#search-result").append(
+            "<tr><td>" +
+              event["args"]["id"] +
+              "</td><td>" +
+              event["args"]["name"] +
+              "</td><td>" +
+              event["args"]["mothersName"] +
+              "</td></tr>"
+          );
+          unique[event["args"]["id"]] = event["args"]["name"];
+        }
+      });
+    });
+  },
 
-    try {
-      const data = await App.Student.get_student_info(id);
-
-      if (enteredMothersName != data["mothersName"]) {
-        Swal.fire({
-          title: "Student Not Found",
-          text: "Make sure you have entered the corrent UID and Mother's Name",
-          icon: "error",
-          confirmButtonText: "Close",
-        });
-      } else {
-        Swal.fire({
-          title: "Student Found",
-          text: "Hi, ".concat(data["name"]),
-          icon: "success",
-          confirmButtonText: "Close",
-        });
-      }
-    } catch (error) {
-      if (enteredMothersName != data["mothersName"]) {
-        Swal.fire({
-          title: "Student Not Found",
-          text: "Make sure you have entered the corrent UID and Mother's Name",
-          icon: "error",
-          confirmButtonText: "Close",
-        });
-      }
+  search_student: async () => {
+    if (App.account != "0x6d2f347eeef0fa8e33e0d4baf05f29641cc98b21") {
+      Swal.fire({
+        title: "You are not admin",
+        text: "Nice Try",
+        icon: "error",
+        confirmButtonText: "Go Back",
+      }).then(() => {
+        window.location = "/";
+      });
+      return;
+    }
+    let keyword = $("#StudentIDFetch").val();
+    var unique = {};
+    let sudents_list = await App.Student.getPastEvents("StudentCreated", {
+      fromBlock: 0,
+    }).then(function (events) {
+      events.forEach((event) => {
+        if (!(event["args"]["id"] in unique)) {
+          unique[event["args"]["id"]] = event["args"]["name"];
+        }
+      });
+    });
+    if (keyword in unique || unique[keyword]) {
+      document.getElementById("search-result").innerHTML =
+        "<tr><td>" + keyword + "</td><td>" + unique[keyword] + "</td></tr>";
+    } else {
+      document.getElementById("search-result").innerHTML = "";
+      App.get_student_list();
     }
   },
 
@@ -176,9 +209,6 @@ App = {
     try {
       const data = await App.Student.get_student_result(id);
       var result = JSON.parse(data["result"]);
-      // var d = new Date(data['dateOfBirth']*1000)
-      // var date = ''.concat(d.getDate(),'-', d.getMonth()+1, '-', d.getUTCFullYear())
-
       if (enteredMothersName != data["mothersName"]) {
         Swal.fire({
           title: "Student Not Found",
