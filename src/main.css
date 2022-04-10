@@ -1,55 +1,127 @@
 /* INDEX PAGE  */
-.cover {
-  top: 0;
-  left: 0;
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  background-color: #131313;
-}
 
-.covertext {
-  color: azure;
-  font-size: xx-large;
-  width: 50%;
-  margin: auto;
-  margin-top: 20%;
+.bleedimg {
+  /* position: relative; */
+  /* The image used */
+  background: url("https://i.imgur.com/pLBikFF.png") no-repeat top center fixed;
+
+  /* Full height */
+  height: 100vh;
+  top: 0;
+  /* Center and scale the image nicely */
+  /* padding-top: 15em; */
   text-align: center;
-  font-weight: bolder;
+  justify-content: center;
 }
 
 .studentinfo {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 30%;
   width: 25%;
-  justify-content: center;
   margin: auto;
-  margin-top: 25vh;
   padding: 1.2em;
+  border-radius: 2em;
+  z-index: 1;
 }
 .addbutton {
   text-align: center;
 }
 
+.content {
+  z-index: 20;
+  position: relative;
+  height: 100vh;
+  background: url("https://i.imgur.com/UkkKxOL.png") no-repeat top center;
+}
+
+.content h1 {
+  background-color: #3a5570;
+  padding: 0.5rem;
+}
+
+.content p {
+  background-color: #585800;
+  padding: 0.5rem;
+}
+
+.form-group {
+  margin: 0.5rem;
+}
+
 /* ADMIN PAGE  */
 .studentform {
-  width: 75%;
-  margin: auto;
-  margin-top: 2em;
+  /* width: 50%; */
   padding: 1.2em;
+  border: 1px solid black;
+}
+
+.search-result {
+  width: 90%;
+}
+.search-button {
+  width: 20%;
+  margin: auto;
 }
 
 /* VERIFY PAGE */
+.cover {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  padding-top: 10em;
+  background: url("https://i.imgur.com/jUN8f5o.png") no-repeat top center fixed;
+}
+
 .verify {
   width: 50%;
   margin: auto;
   margin-top: 4em;
   text-align: center;
   padding: 1.2em;
+  border-radius: 4em;
 }
 
 .verifytext {
   width: 90%;
   height: 300px;
-  margin-top: 2em;
+}
+
+/* ABOUT US PAGE */
+.about-cover {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  padding-top: 20em;
+  background: url("https://i.imgur.com/CFlZy5N.png") no-repeat top center fixed;
+  overflow: auto;
+}
+
+.social-link {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 50%;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.social-link:hover,
+.social-link:focus {
+  background: #ddd;
+  text-decoration: none;
+  color: #555;
+}
+.about-card {
+  text-align: center;
 }
 
 /* RESPONSIVE */
