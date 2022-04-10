@@ -95,9 +95,17 @@
   top: 0;
   height: 100vh;
   width: 100vw;
-  padding-top: 20em;
-  background: url("https://i.imgur.com/CFlZy5N.png") no-repeat top center fixed;
+  /* padding-top: 20em; */
+  background: url("https://i.imgur.com/5d4lAVl.png") no-repeat top center fixed;
   overflow: auto;
+}
+
+.about-title {
+  font-family: 'Londrina Outline', cursive;
+  font-size: 17rem;
+  font-weight: lighter;
+  text-align: center;
+  color: #0089a9;
 }
 
 .social-link {
@@ -146,5 +154,32 @@
 @media screen and (max-width: 342px) {
   .studentinfo {
     width: 90%;
+  }
+}
+
+@media screen and (max-width: 1322px) {
+  .about-title{
+    margin-top: 1em;
+    font-size: 13em;
+  }
+}
+
+@media screen and (max-width: 1012px) {
+  .about-title{
+    margin-top: 1em;
+    font-size: 10em;
+  }
+}
+
+@media screen and (max-width: 777px) {
+  .about-title{
+    margin-top: 1em;
+    font-size: 7em;
+  }
+}
+@media screen and (max-width: 544px) {
+  .about-title{
+    margin-top: 1em;
+    font-size: 4em;
   }
 }
