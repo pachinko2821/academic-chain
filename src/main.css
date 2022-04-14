@@ -51,19 +51,28 @@
 }
 
 /* ADMIN PAGE  */
+.admin-container {
+  background: url("https://i.imgur.com/sj0z7F7.png") no-repeat center fixed;
+  height: 100vh;
+  width: 100%;
+  /* text-align: center; */
+  justify-content: center;
+  padding: 4em;
+  padding-top: 0em;
+}
 .studentform {
   /* width: 50%; */
   padding: 1.2em;
-  border: 1px solid black;
+  border-radius: 1em;
 }
-
 .search-result {
-  width: 90%;
+  text-align: center;
+  width: 100%;
 }
-.search-button {
+/* .search-button {
   width: 20%;
-  margin: auto;
-}
+
+} */
 
 /* VERIFY PAGE */
 .cover {
@@ -181,5 +190,20 @@
   .about-title{
     margin-top: 1em;
     font-size: 4em;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .admin-container {
+    background: rgb(210, 119, 0);
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+  }
+  .search-result {
+    font-size: small;
+  }
+  .modalCaller {
+    font-size: small;
   }
 }

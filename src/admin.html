@@ -71,129 +71,145 @@
       </div>
     </nav>
 
-    <div class="container mt-4 mx-auto overflow-hidden">
-      <div class="row g-4">
-        <div class="col-lg-6 col-md-12">
-          <div class="studentform">
-            <h2>REGISTER STUDENT</h2>
-            <form
-              onSubmit="App.add_student_info(); return false;"
-              class="my-form"
-            >
-              <div class="information">
-                <div class="form-group">
-                  <label for="StudentName">Name</label>
-                  <input
-                    id="StudentName"
-                    type="text"
-                    class="form-control my-2"
-                    placeholder="John Doe"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="mothersName">Mother's Name</label>
-                  <input
-                    id="mothersName"
-                    type="text"
-                    class="form-control my-2"
-                    placeholder="John Doe"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="StudentID">HallTicket</label>
-                  <input
-                    id="StudentID"
-                    type="text"
-                    class="form-control my-2"
-                    placeholder="118XY1234A"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="DateOfBirth">Date of Birth</label>
-                  <input
-                    id="DateOfBirth"
-                    type="date"
-                    class="form-control my-2"
-                    placeholder="10-10-2000"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary addbutton">
-                    Add Student
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <div class="studentform">
-            <h2>SEARCH STUDENT</h2>
-            <form id="search-form" class="my-form1">
-              <div class="information1">
-                <div class="form-group">
-                  <label for="StudentIDFetch">Student ID</label>
-                  <input
-                    id="StudentIDFetch"
-                    type="text"
-                    class="form-control"
-                    placeholder="118XY1234A"
-                    required
-                  />
-                </div>
-              </div>
-            </form>
-            <div class="search-button">
-              <button
-                onclick="App.search_student(); return false;"
-                class="btn btn-primary mb-3"
+    <div class="admin-container w-100">
+      <div class="container mt-4 mx-auto">
+        <div class="row g-4">
+          <div class="col-lg-12">
+            <div class="studentform bg-black border border-warning text-light">
+              <h2>REGISTER STUDENT</h2>
+              <form
+                onSubmit="App.add_student_info(); return false;"
+                class="my-form"
               >
-                Search
-              </button>
+                <div class="information">
+                  <div class="form-group">
+                    <label for="StudentName">Name</label>
+                    <input
+                      id="StudentName"
+                      type="text"
+                      class="form-control my-2"
+                      placeholder="John Doe"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="mothersName">Mother's Name</label>
+                    <input
+                      id="mothersName"
+                      type="text"
+                      class="form-control my-2"
+                      placeholder="John Doe"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="StudentID">HallTicket</label>
+                    <input
+                      id="StudentID"
+                      type="text"
+                      class="form-control my-2"
+                      placeholder="118XY1234A"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="DateOfBirth">Date of Birth</label>
+                    <input
+                      id="DateOfBirth"
+                      type="date"
+                      class="form-control my-2"
+                      placeholder="10-10-2000"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <button
+                      type="submit"
+                      class="btn btn-outline-warning addbutton"
+                    >
+                      Add Student
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
-            <table
-              id="search-result"
-              class="search-result table table-hover m-auto p-3"
-            >
-              <h2>REGISTERED STUDENT LIST</h2>
-              <tbody>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Mother's Name</th>
-                </tr>
-              </tbody>
-            </table>
+          </div>
+          <div class="col-lg-12">
+            <div class="studentform bg-black border border-warning text-light">
+              <h2>SEARCH STUDENT</h2>
+              <form id="search-form" class="my-form1">
+                <div class="information1">
+                  <div class="form-group">
+                    <label for="StudentIDFetch">Student ID</label>
+                    <input
+                      id="StudentIDFetch"
+                      type="text"
+                      class="form-control"
+                      placeholder="118XY1234A"
+                      required
+                    />
+                  </div>
+                  <div class="search-button form-group">
+                    <button
+                      onclick="App.search_student(); return false;"
+                      class="btn btn-outline-warning mb-3"
+                    >
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <table
+                id="search-result"
+                class="search-result table text-light table-borderless table-hover m-auto p-3"
+              >
+                <h2>REGISTERED STUDENTS LIST</h2>
+                <tbody>
+                  <tr>
+                    <th scope="col">HallTicket</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Mother's Name</th>
+                    <th scope="col">Add Result</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-      <div class="row mt-2 g-4">
-        <div class="col-lg-6">
-          <div class="studentform">
-            <h2>ADD STUDENT RESULT</h2>
+    </div>
+    <div class="modal text-light" id="studentFormModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content bg-black border border-warning">
+          <div class="modal-header">
+            <h5 class="modal-title">ADD STUDENT RESULT</h5>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              X
+            </button>
+          </div>
+          <div class="modal-body">
             <form
               onSubmit="App.add_student_result(); return false;"
               class="my-form"
             >
               <div class="information">
                 <div class="form-group">
-                  <label for="id">HallTicket</label>
                   <input
                     id="id"
-                    type="text"
+                    type="hidden"
                     class="form-control my-2"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label for="mothersNameResult">Mothers Name</label>
                   <input
                     id="mothersNameResult"
-                    type="text"
+                    type="hidden"
                     class="form-control my-2"
                     required
                   />
@@ -259,7 +275,10 @@
                   />
                 </div>
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary addbutton">
+                  <button
+                    type="submit"
+                    class="btn btn-outline-warning addbutton"
+                  >
                     Add Result
                   </button>
                 </div>

@@ -73,6 +73,42 @@ App = {
     });
   },
 
+  add_result_btn_insert: () => {
+    let modal = document.getElementById("studentFormModal");
+    let holders = document.querySelectorAll("#search-result td");
+    holders.forEach((holder) => {
+      if (holder.innerHTML == "") {
+        let modalButton = document.createElement("button");
+        modalButton.innerHTML = "Add Result";
+        modalButton.setAttribute("id", "modalCaller");
+        modalButton.setAttribute("class", "btn");
+        modalButton.classList.add("btn-outline-warning");
+        modalButton.classList.add("modalCaller");
+        modalButton.setAttribute("data-bs-toggle", "modal");
+        modalButton.setAttribute("data-bs-target", "#studentFormModal");
+        holder.appendChild(modalButton);
+
+        modalButton.addEventListener("click", function () {
+          document
+            .getElementById("id")
+            .setAttribute(
+              "value",
+              this.parentElement.parentElement.children[0].innerHTML
+            );
+          document
+            .getElementById("mothersNameResult")
+            .setAttribute(
+              "value",
+              this.parentElement.parentElement.children[2].innerHTML
+            );
+        });
+      }
+    });
+    modal.addEventListener("shown.bs.modal", function () {
+      $("#studentFormModal").focus();
+    });
+  },
+
   get_student_list: async () => {
     if (App.account != "0x6d2f347eeef0fa8e33e0d4baf05f29641cc98b21") {
       Swal.fire({
@@ -98,12 +134,14 @@ App = {
               event["args"]["name"] +
               "</td><td>" +
               event["args"]["mothersName"] +
+              "</td><td id='modalButtonHolder'>" +
               "</td></tr>"
           );
           unique[event["args"]["id"]] = event["args"]["name"];
         }
       });
     });
+    App.add_result_btn_insert();
   },
 
   search_student: async () => {
@@ -125,17 +163,30 @@ App = {
     }).then(function (events) {
       events.forEach((event) => {
         if (!(event["args"]["id"] in unique)) {
-          unique[event["args"]["id"]] = event["args"]["name"];
+          unique[event["args"]["id"]] = {
+            name: event["args"]["name"],
+            mothersName: event["args"]["mothersName"],
+          };
         }
       });
     });
-    if (keyword in unique || unique[keyword]) {
+    if (unique[keyword]) {
+      console.log(unique[keyword]);
       document.getElementById("search-result").innerHTML =
-        "<tr><td>" + keyword + "</td><td>" + unique[keyword] + "</td></tr>";
+        "<tr><td>" +
+        keyword +
+        "</td><td>" +
+        unique[keyword]["name"] +
+        "</td><td>" +
+        unique[keyword]["mothersName"] +
+        "</td><td id='modalButtonHolder'>" +
+        "</td></tr>";
     } else {
-      document.getElementById("search-result").innerHTML = "";
+      document.getElementById("search-result").innerHTML =
+        "<tr><th>HallTicket</th><th>Name</th><th>Mother's Name</th>";
       App.get_student_list();
     }
+    App.add_result_btn_insert();
   },
 
   add_student_result: async () => {
