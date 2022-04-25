@@ -3,7 +3,7 @@
 .bleedimg {
   /* position: relative; */
   /* The image used */
-  background: url("https://i.imgur.com/pLBikFF.png") no-repeat top center fixed;
+  background: url("img/pLBikFF.png") no-repeat top center fixed;
 
   /* Full height */
   height: 100vh;
@@ -33,7 +33,7 @@
   z-index: 20;
   position: relative;
   height: 100vh;
-  background: url("https://i.imgur.com/UkkKxOL.png") no-repeat top center;
+  background: url("img/UkkKxOL.png") no-repeat top center;
 }
 
 .content h1 {
@@ -52,7 +52,7 @@
 
 /* ADMIN PAGE  */
 .admin-container {
-  background: url("https://i.imgur.com/sj0z7F7.png") no-repeat center fixed;
+  background: url("img/sj0z7F7.png") no-repeat center fixed;
   height: 100vh;
   width: 100%;
   /* text-align: center; */
@@ -78,7 +78,7 @@
   height: 100vh;
   width: 100vw;
   padding-top: 10em;
-  background: url("https://i.imgur.com/jUN8f5o.png") no-repeat top center fixed;
+  background: url("img/jUN8f5o.png") no-repeat top center fixed;
 }
 
 .verify {
@@ -102,7 +102,7 @@
   height: 100vh;
   width: 100vw;
   /* padding-top: 20em; */
-  background: url("https://i.imgur.com/5d4lAVl.png") no-repeat top center fixed;
+  background: url("img/5d4lAVl.png") no-repeat top center fixed;
   overflow: auto;
 }
 
